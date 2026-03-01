@@ -1,0 +1,18 @@
+services:
+  nopcommerce:
+    image: nopcommerceteam/nopcommerce
+    container_name: nopcommerce
+    ports:
+      - "9002:80"
+    networks:
+      - qa-network
+    volumes:
+      - nopcommerce_data:/app/App_Data
+
+volumes:
+  nopcommerce_data:
+    name: qa-nopcomerce-data
+
+networks:
+  qa-network:
+    external: true

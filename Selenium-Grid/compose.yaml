@@ -7,9 +7,51 @@ services:
       - "4442:4442"
       - "4443:4443"
       - "4444:4444"
+    volumes:
+      - selenium_hub_data:/opt/selenium
+    networks:
+      - grid
+
+  selenium-video-chrome:
+    image: selenium/video:ffmpeg-8.0-20260222
+    container_name: selenium-video-chrome
+    volumes:
+      - selenium_chrome_videos:/videos
+    environment:
+      DISPLAY_CONTAINER_NAME: node-chrome
+      FILE_NAME: auto
+    networks:
+      - grid
+  selenium-video-edge:
+    image: selenium/video:ffmpeg-8.0-20260222
+    container_name: selenium-video-edge
+    volumes:
+      - selenium_edge_videos:/videos
+    environment:
+      DISPLAY_CONTAINER_NAME: node-edge
+      FILE_NAME: auto
+    networks:
+      - grid
+  selenium-video-firefox:
+    image: selenium/video:ffmpeg-8.0-20260222
+    container_name: selenium-video-firefox
+    volumes:
+      - selenium_firefox_videos:/videos
+    environment:
+      DISPLAY_CONTAINER_NAME: node-firefox
+      FILE_NAME: auto
     networks:
       - grid
 
 networks:
   grid:
     name: selenium-grid-network
+volumes:
+  selenium_hub_data:
+    name: selenium-hub-data
+  selenium_chrome_videos:
+    name: selenium-chrome-videos
+  selenium_edge_videos:
+    name: selenium-edge-videos
+  selenium_firefox_videos:
+    name: selenium-firefox-videos

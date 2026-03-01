@@ -1,0 +1,18 @@
+services:
+  petstore:
+    image: swaggerapi/petstore3:1.0.27
+    container_name: petstore
+    ports:
+      - "9004:8080"
+    networks:
+      - qa-network
+    volumes:
+      - petstore_data:/app/
+
+volumes:
+  petstore_data:
+    name: qa-petstore-data
+
+networks:
+  qa-network:
+    external: true

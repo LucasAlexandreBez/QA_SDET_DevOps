@@ -1,0 +1,18 @@
+services:
+  parabank:
+    image: parasoft/parabank
+    container_name: parabank
+    ports:
+      - "9001:8080"
+    networks:
+      - qa-network
+    volumes:
+      - parabank_data:/data
+
+volumes:
+  parabank_data:
+    name: qa-parabank-data
+
+networks:
+  qa-network:
+    external: true

@@ -1,0 +1,84 @@
+services:
+  node-chrome:
+    image: selenium/node-chrome:145.0-20260222
+    container_name: node-chrome
+    restart: on-failure
+    shm_size: 3gb
+    mem_limit: 4gb
+    cpus: 2
+    networks:
+      - grid
+    environment:
+      SE_EVENT_BUS_HOST: selenium-hub
+      SE_EVENT_BUS_PUBLISH_PORT: 4442
+      SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
+      SE_NODE_MAX_SESSIONS: 4
+      SE_NODE_OVERRIDE_MAX_SESSIONS: true
+      SE_NODE_SESSION_TIMEOUT: 300
+      SE_SCREEN_WIDTH: 1920
+      SE_SCREEN_HEIGHT: 1080
+      SE_SCREEN_DEPTH: 24
+      SE_VNC_NO_PASSWORD: 1
+      SE_LOG_LEVEL: INFO
+    volumes:
+      - chrome_node_data:/opt/selenium
+  node-edge:
+    image: selenium/node-edge:145.0-20260222
+    container_name: node-edge
+    restart: on-failure
+    shm_size: 3gb
+    mem_limit: 4gb
+    cpus: 2
+    networks:
+      - grid
+    environment:
+      SE_EVENT_BUS_HOST: selenium-hub
+      SE_EVENT_BUS_PUBLISH_PORT: 4442
+      SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
+      SE_NODE_MAX_SESSIONS: 4
+      SE_NODE_OVERRIDE_MAX_SESSIONS: true
+      SE_NODE_SESSION_TIMEOUT: 300
+      SE_SCREEN_WIDTH: 1920
+      SE_SCREEN_HEIGHT: 1080
+      SE_SCREEN_DEPTH: 24
+      SE_VNC_NO_PASSWORD: 1
+      SE_LOG_LEVEL: INFO
+    volumes:
+      - edge_node_data:/opt/selenium
+  
+  node-firefox:
+    image: selenium/node-firefox:128.0-20260222
+    container_name: node-firefox
+    restart: on-failure
+    shm_size: 3gb
+    mem_limit: 4gb
+    cpus: 2
+    networks:
+      - grid
+    environment:
+      SE_EVENT_BUS_HOST: selenium-hub
+      SE_EVENT_BUS_PUBLISH_PORT: 4442
+      SE_EVENT_BUS_SUBSCRIBE_PORT: 4443
+      SE_NODE_MAX_SESSIONS: 4
+      SE_NODE_OVERRIDE_MAX_SESSIONS: true
+      SE_NODE_SESSION_TIMEOUT: 300
+      SE_SCREEN_WIDTH: 1920
+      SE_SCREEN_HEIGHT: 1080
+      SE_SCREEN_DEPTH: 24
+      SE_VNC_NO_PASSWORD: 1
+      SE_LOG_LEVEL: INFO
+    volumes:
+      - firefox_node_data:/opt/selenium
+
+networks:
+  grid:
+    external: true
+    name: selenium-grid-network
+
+volumes:
+  chrome_node_data:
+    name: chrome-node-data
+  edge_node_data:
+    name: edge-node-data
+  firefox_node_data:
+    name: firefox-node-data
