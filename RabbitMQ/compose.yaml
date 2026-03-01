@@ -1,0 +1,18 @@
+services:
+  rabbitmq:
+    image: rabbitmq:4.2.4-management
+    container_name: rabbitmq
+    hostname: rabbitmq
+    restart: on-failure
+    environment:
+      RABBITMQ_DEFAULT_USER: QA_SDET_DEVOPS
+      RABBITMQ_DEFAULT_PASS: Devops@2026
+      RABBITMQ_DEFAULT_VHOST: devops
+    ports:
+      - "8004:5672"
+      - "8005:15672"
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+volumes:
+  rabbitmq_data:
