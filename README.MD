@@ -1,2 +1,2 @@
-Hands-on repository for QA Automation, SDET and DevOps practices,
-including Selenium Grid, RabbitMQ and infrastructure experiments.
+# Docker
+Learning repository focused on developing practical skills with Docker through experiments and real-world scenarios. 
